@@ -1,9 +1,49 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/movie_detail"
-    style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context="udacity.aly.movies_app.MovieDetailFragment" />
+    tools:context="udacity.aly.movies_app.MovieDetailFragment">
+
+
+    <TextView
+        android:id="@+id/movie_detail"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/movie_ratingView"
+        android:padding="16dp"
+        android:text="Movie Detail"
+        android:textIsSelectable="true" />
+
+    <TextView
+        android:id="@+id/movie_ratingView"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/release_dateView"
+        android:padding="16dp"
+        android:text="Rating"
+        android:textIsSelectable="true" />
+
+    <TextView
+        android:id="@+id/release_dateView"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/poster_imageView"
+        android:padding="16dp"
+        android:text="release Date"
+        android:textIsSelectable="true" />
+
+    <ImageView
+        android:id="@+id/poster_imageView"
+        android:layout_width="185dp"
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+</RelativeLayout>
+

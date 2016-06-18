@@ -15,7 +15,6 @@ import java.util.Map;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class MovieContent {
-    public static String[] MOVIES_ATTR = {"id", "title", "overview", "release_date", "poster_path", "vote_average"};
     /**
      * An array of sample (dummy) items.
      */
@@ -24,6 +23,7 @@ public class MovieContent {
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, Movie> MOVIES_ITEM_MAP = new HashMap<String, Movie>();
+    public static String[] MOVIES_ATTR = {"id", "title", "overview", "release_date", "poster_path", "vote_average"};
 
     public static void addItem(Movie item) {
         MOVIES_ITEMS.add(item);
@@ -48,6 +48,10 @@ public class MovieContent {
                 json_input.getString(MOVIES_ATTR[4]), json_input.getDouble(MOVIES_ATTR[5]));
     }
 
+    public static String createPosterUrl(Movie m) {
+        return "http://image.tmdb.org/t/p/w185/" + m.getPoster_path();
+
+    }
     /**
      * A dummy item representing a piece of content.
      */

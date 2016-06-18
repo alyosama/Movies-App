@@ -1,13 +1,16 @@
 package udacity.aly.movies_app;
 
 import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * A fragment representing a single Movie detail screen.
@@ -56,11 +59,20 @@ public class MovieDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.movie_detail, container, false);
-        // Show the dummy content as text in a TextView.
+
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.movie_detail)).setText(mItem.getOverview());
+            ((TextView) rootView.findViewById(R.id.movie_ratingView)).setText(String.valueOf(mItem.getVote_average()) + "/10");
+            ((TextView) rootView.findViewById(R.id.release_dateView)).setText(mItem.getRelease_date());
+            ImageView posterImage = ((ImageView) rootView.findViewById(R.id.poster_imageView));
+            Picasso.with(getActivity()).load(MovieContent.createPosterUrl(mItem))
+                    .placeholder(R.mipmap.ic_loading).fit()
+                    .into(posterImage);
         }
-
+        //movie poster image thumbnail
+        //A plot synopsis (called overview in the api)
+        //user rating (called vote_average in the api)
+        //release date
 
 
         return rootView;

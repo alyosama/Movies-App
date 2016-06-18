@@ -18,8 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 
 import com.squareup.picasso.Picasso;
 
@@ -140,9 +138,9 @@ public class MovieListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-
-            String url = "http://image.tmdb.org/t/p/w185/" + mValues.get(position).getPoster_path();
-            Picasso.with(getApplicationContext()).load(url).placeholder(R.mipmap.ic_loading).fit().into(holder.mContentView);
+            Picasso.with(getApplicationContext()).load(MovieContent.createPosterUrl(mValues.get(position)))
+                    .placeholder(R.mipmap.ic_loading).fit()
+                    .into(holder.mContentView);
 
             //holder.mContentView.setText(mValues.get(position).getTitle());
 
@@ -219,9 +217,7 @@ public class MovieListActivity extends AppCompatActivity {
             String moviesJsonStr = null;
 
             try {
-                final String MOVIE_BASE_URL =
-                        "http://api.themoviedb.org/3/movie/";
-
+                final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
                 final String movies_settings = params[0]+"?";
                 final String API_KEY = "api_key=" + BuildConfig.MOVIE_API_KEY;
                 URL url = new URL(MOVIE_BASE_URL + movies_settings + API_KEY);
