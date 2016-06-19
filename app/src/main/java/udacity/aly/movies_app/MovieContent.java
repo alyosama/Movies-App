@@ -23,17 +23,18 @@ public class MovieContent {
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, Movie> MOVIES_ITEM_MAP = new HashMap<String, Movie>();
-    public static String[] MOVIES_ATTR = {"id", "title", "overview", "release_date", "poster_path", "vote_average"};
 
     public static void addItem(Movie item) {
         MOVIES_ITEMS.add(item);
         MOVIES_ITEM_MAP.put(item.getTitle(), item);
     }
+
+    ;
+
     public static void clearItems() {
         MOVIES_ITEMS.clear();
         MOVIES_ITEM_MAP.clear();
     }
-
 
     /**
      * Movie Factory From Json Input
@@ -43,15 +44,21 @@ public class MovieContent {
      * @throws JSONException
      */
     public static Movie createMovieFromJson(JSONObject json_input) throws JSONException {
-        return new Movie(json_input.getInt(MOVIES_ATTR[0]), json_input.getString(MOVIES_ATTR[1]),
-                json_input.getString(MOVIES_ATTR[2]), json_input.getString(MOVIES_ATTR[3]),
-                json_input.getString(MOVIES_ATTR[4]), json_input.getDouble(MOVIES_ATTR[5]));
+        return new Movie(json_input.getInt(MOVIES_ATTR.id.toString()),
+                json_input.getString(MOVIES_ATTR.title.toString()),
+                json_input.getString(MOVIES_ATTR.overview.toString()),
+                json_input.getString(MOVIES_ATTR.release_date.toString()),
+                json_input.getString(MOVIES_ATTR.poster_path.toString()),
+                json_input.getDouble(MOVIES_ATTR.vote_average.toString()));
     }
 
     public static String createPosterUrl(Movie m) {
         return "http://image.tmdb.org/t/p/w185/" + m.getPoster_path();
 
     }
+
+    enum MOVIES_ATTR {id, title, overview, release_date, poster_path, vote_average, favorite}
+
     /**
      * A dummy item representing a piece of content.
      */
@@ -63,6 +70,7 @@ public class MovieContent {
         private String release_date;
         private String poster_path;
         private double vote_average;
+        private int isFavorite;
 
         public Movie(int id, String title, String overview, String release_date, String poster_path, double vote_average) {
             this.id = id;
@@ -96,6 +104,14 @@ public class MovieContent {
 
         public double getVote_average() {
             return vote_average;
+        }
+
+        public int isFavorite() {
+            return isFavorite;
+        }
+
+        public void setIsFavorite(int isFavorite) {
+            this.isFavorite = isFavorite;
         }
 
         @Override

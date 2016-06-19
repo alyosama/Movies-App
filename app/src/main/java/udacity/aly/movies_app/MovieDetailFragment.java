@@ -23,7 +23,7 @@ public class MovieDetailFragment extends Fragment {
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_ITEM_ID = "movie_id";
 
     /**
      * The dummy content this fragment is presenting.
@@ -66,7 +66,7 @@ public class MovieDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.release_dateView)).setText(mItem.getRelease_date());
             ImageView posterImage = ((ImageView) rootView.findViewById(R.id.poster_imageView));
             Picasso.with(getActivity()).load(MovieContent.createPosterUrl(mItem))
-                    .placeholder(R.mipmap.ic_loading).fit()
+                    .placeholder(R.drawable.ic_camera_roll).fit()
                     .into(posterImage);
         }
         //movie poster image thumbnail

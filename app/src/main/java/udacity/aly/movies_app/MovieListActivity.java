@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -44,6 +43,7 @@ import java.util.List;
  */
 public class MovieListActivity extends AppCompatActivity {
 
+    MovieDatabaseHelper dbHelper = new MovieDatabaseHelper(this);
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -51,6 +51,7 @@ public class MovieListActivity extends AppCompatActivity {
     private boolean mTwoPane;
     private MovieAdapter mMovieAdapter;
     private View recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,8 +116,8 @@ public class MovieListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         mMovieAdapter=new MovieAdapter(MovieContent.MOVIES_ITEMS);
-        int colCount=3;
-        recyclerView.setLayoutManager(new GridLayoutManager(this,colCount));
+        //int colCount=3;
+        //recyclerView.setLayoutManager(new GridLayoutManager(this,colCount));
         recyclerView.setAdapter(mMovieAdapter);
     }
 
@@ -139,8 +140,7 @@ public class MovieListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
             Picasso.with(getApplicationContext()).load(MovieContent.createPosterUrl(mValues.get(position)))
-                    .placeholder(R.mipmap.ic_loading).fit()
-                    .into(holder.mContentView);
+                    .placeholder(R.drawable.ic_camera_roll).into(holder.mContentView);
 
             //holder.mContentView.setText(mValues.get(position).getTitle());
 
@@ -191,23 +191,24 @@ public class MovieListActivity extends AppCompatActivity {
     public class FetchMoviesTask extends AsyncTask<String, Void, List<MovieContent.Movie>> {
         private final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
 
-        private List<MovieContent.Movie> getMoviesFromJSON(String moviesJsonStr) throws JSONException {
-            List<MovieContent.Movie> movieList = new ArrayList<>();
-            JSONObject moviesJson = new JSONObject(moviesJsonStr);
-            JSONArray moviesListJson = moviesJson.getJSONArray("results");
-            for (int i = 0; i < moviesListJson.length(); i++) {
-                movieList.add(MovieContent.createMovieFromJson(moviesListJson.getJSONObject(i)));
-            }
-            return movieList;
-        }
-
-
         @Override
         protected List<MovieContent.Movie> doInBackground(String... params) {
-
             if (params.length == 0) {
                 return null;
             }
+            if (params[0].equals(getString(R.string.pref_sort_favorite))) {
+                return fetchMoviesFromDatabase();
+            } else {
+                return fetchMoviesFromWeb(params[0]);
+            }
+        }
+
+        protected List<MovieContent.Movie> fetchMoviesFromDatabase() {
+            return dbHelper.getMovies();
+        }
+
+        protected List<MovieContent.Movie> fetchMoviesFromWeb(String param) {
+
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
@@ -218,7 +219,7 @@ public class MovieListActivity extends AppCompatActivity {
 
             try {
                 final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
-                final String movies_settings = params[0]+"?";
+                final String movies_settings = param + "?";
                 final String API_KEY = "api_key=" + BuildConfig.MOVIE_API_KEY;
                 URL url = new URL(MOVIE_BASE_URL + movies_settings + API_KEY);
 
@@ -279,6 +280,18 @@ public class MovieListActivity extends AppCompatActivity {
             // This will only happen if there was an error getting or parsing the forecast.
             return null;
         }
+
+
+        private List<MovieContent.Movie> getMoviesFromJSON(String moviesJsonStr) throws JSONException {
+            List<MovieContent.Movie> movieList = new ArrayList<>();
+            JSONObject moviesJson = new JSONObject(moviesJsonStr);
+            JSONArray moviesListJson = moviesJson.getJSONArray("results");
+            for (int i = 0; i < moviesListJson.length(); i++) {
+                movieList.add(MovieContent.createMovieFromJson(moviesListJson.getJSONObject(i)));
+            }
+            return movieList;
+        }
+
 
         @Override
         protected void onPostExecute(List<MovieContent.Movie> movies) {
