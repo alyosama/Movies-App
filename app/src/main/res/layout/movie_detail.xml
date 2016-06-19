@@ -1,49 +1,102 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="udacity.aly.movies_app.MovieDetailFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/poster_imageView"
+                android:layout_width="185dp"
+                android:layout_height="250dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/release_dateView"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:text="Release Date"
+                    android:textIsSelectable="true" />
+
+                <TextView
+                    android:id="@+id/movie_ratingView"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Rating"
+                    android:textIsSelectable="true" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/movie_detail"
+            style="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Movie Detail"
+            android:textIsSelectable="true" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/movie_detail"
+        android:id="@+id/trailers_label_text"
         style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/movie_ratingView"
         android:padding="16dp"
-        android:text="Movie Detail"
+        android:text="Trailers"
         android:textIsSelectable="true" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/videos_list"
+        android:name="udacity.aly.movies_app.VideosListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="udacity.aly.movies_app.MovieDetailActivity"
+        tools:listitem="@layout/video_list_content" />
+
+
     <TextView
-        android:id="@+id/movie_ratingView"
+        android:id="@+id/reviews_label_text"
         style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/release_dateView"
         android:padding="16dp"
-        android:text="Rating"
+        android:text="Reviews"
         android:textIsSelectable="true" />
 
-    <TextView
-        android:id="@+id/release_dateView"
-        style="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reviews_list"
+        android:name="udacity.aly.movies_app.ReviewsDetailFragment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/poster_imageView"
-        android:padding="16dp"
-        android:text="release Date"
-        android:textIsSelectable="true" />
+        app:layoutManager="LinearLayoutManager"
+        tools:context="udacity.aly.movies_app.MovieDetailActivity"
+        tools:listitem="@layout/review_list_content" />
 
-    <ImageView
-        android:id="@+id/poster_imageView"
-        android:layout_width="185dp"
-        android:layout_height="250dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
 
-</RelativeLayout>
+</LinearLayout>
 

@@ -57,8 +57,79 @@ public class MovieContent {
 
     }
 
+    public static Review createReviewFromJson(JSONObject jsonObject) throws JSONException {
+        return new Review(jsonObject.getInt(REVIEW_ATTR.id.toString()),
+                jsonObject.getString(REVIEW_ATTR.author.toString()),
+                jsonObject.getString(REVIEW_ATTR.content.toString()));
+    }
+
+
+    public static Video createVideoFromJson(JSONObject jsonObject) throws JSONException {
+        return new Video(jsonObject.getInt(VIDEO_ATTR.id.toString()),
+                jsonObject.getString(VIDEO_ATTR.name.toString()),
+                jsonObject.getString(VIDEO_ATTR.type.toString()),
+                jsonObject.getString(VIDEO_ATTR.key.toString()));
+    }
+
     enum MOVIES_ATTR {id, title, overview, release_date, poster_path, vote_average, favorite}
 
+    enum REVIEW_ATTR {id, author, content}
+
+    enum VIDEO_ATTR {id, name, type, key}
+
+    public static class Video {
+        private int id;
+        private String name;
+        private String type;
+        private String key;
+
+        public Video(int id, String name, String type, String key) {
+            this.id = id;
+            this.name = name;
+            this.type = type;
+            this.key = key;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public String getKey() {
+            return key;
+        }
+    }
+
+    public static class Review {
+        private int id;
+        private String author;
+        private String content;
+
+        public Review(int id, String author, String content) {
+            this.id = id;
+            this.author = author;
+            this.content = content;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getAuthor() {
+            return author;
+        }
+
+        public String getContent() {
+            return content;
+        }
+    }
     /**
      * A dummy item representing a piece of content.
      */
