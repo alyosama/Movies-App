@@ -62,7 +62,6 @@ public class MovieListActivity extends AppCompatActivity {
         toolbar.setTitle(getTitle());
 
         recyclerView = findViewById(R.id.movie_list);
-        assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
         if (findViewById(R.id.movie_detail_container) != null) {
@@ -115,6 +114,7 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+        assert recyclerView != null;
         mMovieAdapter=new MovieAdapter(MovieContent.MOVIES_ITEMS);
         //int colCount=3;
         //recyclerView.setLayoutManager(new GridLayoutManager(this,colCount));
@@ -141,8 +141,6 @@ public class MovieListActivity extends AppCompatActivity {
             holder.mItem = mValues.get(position);
             Picasso.with(getApplicationContext()).load(MovieContent.createPosterUrl(mValues.get(position)))
                     .placeholder(R.drawable.ic_camera_roll).into(holder.mContentView);
-
-            //holder.mContentView.setText(mValues.get(position).getTitle());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

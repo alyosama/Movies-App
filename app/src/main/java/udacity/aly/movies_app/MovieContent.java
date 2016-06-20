@@ -58,14 +58,14 @@ public class MovieContent {
     }
 
     public static Review createReviewFromJson(JSONObject jsonObject) throws JSONException {
-        return new Review(jsonObject.getInt(REVIEW_ATTR.id.toString()),
+        return new Review(jsonObject.getString(REVIEW_ATTR.id.toString()),
                 jsonObject.getString(REVIEW_ATTR.author.toString()),
                 jsonObject.getString(REVIEW_ATTR.content.toString()));
     }
 
 
     public static Video createVideoFromJson(JSONObject jsonObject) throws JSONException {
-        return new Video(jsonObject.getInt(VIDEO_ATTR.id.toString()),
+        return new Video(jsonObject.getString(VIDEO_ATTR.id.toString()),
                 jsonObject.getString(VIDEO_ATTR.name.toString()),
                 jsonObject.getString(VIDEO_ATTR.type.toString()),
                 jsonObject.getString(VIDEO_ATTR.key.toString()));
@@ -78,19 +78,19 @@ public class MovieContent {
     enum VIDEO_ATTR {id, name, type, key}
 
     public static class Video {
-        private int id;
+        private String id;
         private String name;
         private String type;
         private String key;
 
-        public Video(int id, String name, String type, String key) {
+        public Video(String id, String name, String type, String key) {
             this.id = id;
             this.name = name;
             this.type = type;
             this.key = key;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
@@ -108,17 +108,17 @@ public class MovieContent {
     }
 
     public static class Review {
-        private int id;
+        private String id;
         private String author;
         private String content;
 
-        public Review(int id, String author, String content) {
+        public Review(String id, String author, String content) {
             this.id = id;
             this.author = author;
             this.content = content;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 

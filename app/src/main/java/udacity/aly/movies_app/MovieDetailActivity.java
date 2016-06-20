@@ -32,11 +32,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //TODO Unfavorite when clicked on it
                 MovieContent.Movie m = MovieContent.MOVIES_ITEM_MAP.get(arg);
                 m.setIsFavorite(1);
                 dbHelper.addMovie(m);
-                Snackbar.make(view, "Favorite this movie", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Favorite", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
