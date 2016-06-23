@@ -21,6 +21,9 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
@@ -35,6 +38,7 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Add 'general' preferences, defined in the XML file
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
 
@@ -46,8 +50,17 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
+
             addPreferencesFromResource(R.xml.pref_general);
             bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_sort_key)));
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.settings_toolbar, container, false);
+            return super.onCreateView(inflater, container, savedInstanceState);
 
         }
 
@@ -82,5 +95,6 @@ public class SettingsActivity extends PreferenceActivity {
             return true;
         }
     }
+
 
 }

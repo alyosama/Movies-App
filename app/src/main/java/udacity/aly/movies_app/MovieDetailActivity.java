@@ -31,9 +31,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final MovieContent.Movie m = MovieContent.MOVIES_ITEM_MAP.get(arg);
         if (m.isFavorite() == 1) {
-            fab.setActivated(false);
-        } else {
             fab.setActivated(true);
+        } else {
+            fab.setActivated(false);
 
         }
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,15 +43,14 @@ public class MovieDetailActivity extends AppCompatActivity {
                     m.setIsFavorite(0);
                     dbHelper.deleteMovie(m);
                     Snackbar.make(view, "UnFavorite", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    view.setActivated(!view.isActivated());
 
                 } else {
                     m.setIsFavorite(1);
                     dbHelper.addMovie(m);
                     Snackbar.make(view, "Favorite", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    view.setActivated(!view.isActivated());
-
                 }
+                view.setActivated(!view.isActivated());
+
             }
         });
 
