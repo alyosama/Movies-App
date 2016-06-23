@@ -150,6 +150,7 @@ public class MovieContent {
             this.release_date = release_date;
             this.poster_path = poster_path;
             this.vote_average = vote_average;
+            this.isFavorite = 0;
         }
 
 

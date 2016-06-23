@@ -59,6 +59,11 @@ public class MovieDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void deleteMovie(MovieContent.Movie movie) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(MOVIES_TABLE_NAME, MovieContent.MOVIES_ATTR.id.toString() + "=?", new String[]{String.valueOf(movie.getId())});
+        Log.d("Movie Database", movie.getTitle() + " Removed From Favorite");
+    }
     public List<MovieContent.Movie> getMovies() {
         List<MovieContent.Movie> movies = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + MOVIES_TABLE_NAME;

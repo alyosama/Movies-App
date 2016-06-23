@@ -28,16 +28,30 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
         final String arg = getIntent().getStringExtra(MovieDetailFragment.ARG_ITEM_ID);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final MovieContent.Movie m = MovieContent.MOVIES_ITEM_MAP.get(arg);
+        if (m.isFavorite() == 1) {
+            fab.setActivated(false);
+        } else {
+            fab.setActivated(true);
+
+        }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Unfavorite when clicked on it
-                MovieContent.Movie m = MovieContent.MOVIES_ITEM_MAP.get(arg);
-                m.setIsFavorite(1);
-                dbHelper.addMovie(m);
-                Snackbar.make(view, "Favorite", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (m.isFavorite() == 1) {
+                    m.setIsFavorite(0);
+                    dbHelper.deleteMovie(m);
+                    Snackbar.make(view, "UnFavorite", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    view.setActivated(!view.isActivated());
+
+                } else {
+                    m.setIsFavorite(1);
+                    dbHelper.addMovie(m);
+                    Snackbar.make(view, "Favorite", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    view.setActivated(!view.isActivated());
+
+                }
             }
         });
 
@@ -68,7 +82,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
