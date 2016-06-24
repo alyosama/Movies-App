@@ -56,7 +56,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     Context context = v.getContext();
                     Intent intent = new Intent(context, MovieDetailActivity.class);
                     intent.putExtra(MovieDetailFragment.ARG_ITEM_ID, holder.mItem.getTitle());
-
                     context.startActivity(intent);
                 }
             }
