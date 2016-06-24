@@ -93,6 +93,7 @@ public class MovieDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.movie_detail, container, false);
 
         if (mItem != null) {
+            ((TextView) rootView.findViewById(R.id.movie_title)).setText(mItem.getTitle());
             ((TextView) rootView.findViewById(R.id.movie_detail)).setText(mItem.getOverview());
             ((TextView) rootView.findViewById(R.id.movie_ratingView)).setText(String.valueOf(mItem.getVote_average()) + "/10");
             ((TextView) rootView.findViewById(R.id.release_dateView)).setText(mItem.getRelease_date());

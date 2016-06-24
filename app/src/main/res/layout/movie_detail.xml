@@ -9,7 +9,7 @@
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+        android:orientation="vertical">
 
 
     <LinearLayout
@@ -33,12 +33,21 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/movie_title"
+                    style="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Movie Title"
+                    android:textIsSelectable="true" />
+
+                <TextView
                     android:id="@+id/release_dateView"
                     style="?android:attr/textAppearanceMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:padding="10dp"
+                    android:layout_margin="10dp"
                     android:text="Release Date"
                     android:textIsSelectable="true" />
 
@@ -47,7 +56,7 @@
                     style="?android:attr/textAppearanceMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:layout_margin="10dp"
                     android:text="Rating"
                     android:textIsSelectable="true" />
 
