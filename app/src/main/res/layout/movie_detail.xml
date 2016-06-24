@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/movie_detail_view"
@@ -6,76 +6,28 @@
     android:layout_height="match_parent"
     tools:context="udacity.aly.movies_app.MovieDetailFragment">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/hidden_layout_fab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"></LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollview_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/poster_imageView"
-                        android:layout_width="185dp"
-                        android:layout_height="250dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/movie_title"
-                            style="?android:attr/textAppearanceLarge"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:layout_marginTop="20dp"
-                            android:text="Movie Title"
-                            android:textIsSelectable="true" />
-
-                        <TextView
-                            android:id="@+id/release_dateView"
-                            style="?android:attr/textAppearanceMedium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="Release Date"
-                            android:textIsSelectable="true" />
-
-                        <TextView
-                            android:id="@+id/movie_ratingView"
-                            style="?android:attr/textAppearanceMedium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="Rating"
-                            android:textIsSelectable="true" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/movie_detail"
-                    style="?android:attr/textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Movie Detail"
-                    android:textIsSelectable="true" />
-
-            </LinearLayout>
+            <include layout="@layout/movie_detail_header" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,12 +100,16 @@
         </LinearLayout>
     </ScrollView>
 
+    </FrameLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_grade" />
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_grade"
+        app:layout_anchor="@id/hidden_layout_fab"
+        app:layout_anchorGravity="bottom|right|end" />
 
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>
+

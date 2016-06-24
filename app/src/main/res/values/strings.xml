@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Movies-App</string>
+    <string name="app_name">Udacity Movies App</string>
     <string name="title_movie_detail">Movie Detail</string>
     <string name="title_settings">Settings</string>
 
