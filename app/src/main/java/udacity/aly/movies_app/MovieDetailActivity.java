@@ -2,13 +2,11 @@ package udacity.aly.movies_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 /**
  * An activity representing a single Movie detail screen. This
@@ -18,7 +16,12 @@ import android.view.View;
  */
 public class MovieDetailActivity extends AppCompatActivity {
 
-    MovieDatabaseHelper dbHelper = new MovieDatabaseHelper(this);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,31 +31,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
         final String arg = getIntent().getStringExtra(MovieDetailFragment.ARG_ITEM_ID);
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final MovieContent.Movie m = MovieContent.MOVIES_ITEM_MAP.get(arg);
-        if (m.isFavorite() == 1) {
-            fab.setActivated(true);
-        } else {
-            fab.setActivated(false);
 
-        }
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (m.isFavorite() == 1) {
-                    m.setIsFavorite(0);
-                    dbHelper.deleteMovie(m);
-                    Snackbar.make(view, "UnFavorite", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-
-                } else {
-                    m.setIsFavorite(1);
-                    dbHelper.addMovie(m);
-                    Snackbar.make(view, "Favorite", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }
-                view.setActivated(!view.isActivated());
-
-            }
-        });
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -94,7 +74,6 @@ public class MovieDetailActivity extends AppCompatActivity {
             navigateUpTo(new Intent(this, MovieListActivity.class));
             return true;
         }
-        //TODO Create Settings at Menu
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;

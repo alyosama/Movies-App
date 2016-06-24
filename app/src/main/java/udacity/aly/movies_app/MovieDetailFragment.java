@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,6 +40,7 @@ public class MovieDetailFragment extends Fragment {
     private View videosRecyclerView;
     private VideoAdapter mVideoAdapter;
     private ReviewAdapter mReviewAdapter;
+    private MovieDatabaseHelper dbHelper;
 
 
     /**
@@ -58,9 +61,12 @@ public class MovieDetailFragment extends Fragment {
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getTitle());
             }
+
+
         }
 
 
+        dbHelper = new MovieDatabaseHelper(getContext());
     }
 
 
@@ -109,6 +115,31 @@ public class MovieDetailFragment extends Fragment {
             reviewsRecyclerView = rootView.findViewById(R.id.reviews_list);
             setupReviewRecyclerView((RecyclerView) reviewsRecyclerView);
 
+            final FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+
+            if (mItem.isFavorite() == 1) {
+                fab.setImageResource(R.drawable.ic_favorite);
+            } else {
+                fab.setImageResource(R.drawable.ic_grade);
+
+            }
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mItem.isFavorite() == 1) {
+                        mItem.setIsFavorite(0);
+                        dbHelper.deleteMovie(mItem);
+                        Snackbar.make(view, "UnFavorite", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        fab.setImageResource(R.drawable.ic_grade);
+
+                    } else {
+                        mItem.setIsFavorite(1);
+                        dbHelper.addMovie(mItem);
+                        Snackbar.make(view, "Favorite", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        fab.setImageResource(R.drawable.ic_favorite);
+                    }
+                }
+            });
 
         }
         return rootView;

@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/movie_detail_view"
@@ -6,26 +6,76 @@
     android:layout_height="match_parent"
     tools:context="udacity.aly.movies_app.MovieDetailFragment">
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/poster_imageView"
-                android:layout_width="185dp"
-                android:layout_height="250dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/poster_imageView"
+                        android:layout_width="185dp"
+                        android:layout_height="250dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/movie_title"
+                            style="?android:attr/textAppearanceLarge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Movie Title"
+                            android:textIsSelectable="true" />
+
+                        <TextView
+                            android:id="@+id/release_dateView"
+                            style="?android:attr/textAppearanceMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Release Date"
+                            android:textIsSelectable="true" />
+
+                        <TextView
+                            android:id="@+id/movie_ratingView"
+                            style="?android:attr/textAppearanceMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Rating"
+                            android:textIsSelectable="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/movie_detail"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Movie Detail"
+                    android:textIsSelectable="true" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,97 +83,77 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/movie_title"
+                    android:id="@+id/trailers_label_text"
                     style="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Movie Title"
+                    android:padding="16dp"
+                    android:text="Trailers"
                     android:textIsSelectable="true" />
 
                 <TextView
-                    android:id="@+id/release_dateView"
+                    android:id="@+id/videos_text_unava"
                     style="?android:attr/textAppearanceMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Release Date"
+                    android:padding="16dp"
+                    android:text="There is no trailers"
+                    android:textIsSelectable="true"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/videos_list"
+                    android:name="udacity.aly.movies_app.VideosListFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:context="udacity.aly.movies_app.MovieDetailActivity"
+                    tools:listitem="@layout/video_list_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/reviews_label_text"
+                    style="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Reviews"
                     android:textIsSelectable="true" />
 
                 <TextView
-                    android:id="@+id/movie_ratingView"
+                    android:id="@+id/reviews_text_unava"
                     style="?android:attr/textAppearanceMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Rating"
-                    android:textIsSelectable="true" />
+                    android:padding="16dp"
+                    android:text="There is no reviews"
+                    android:textIsSelectable="true"
+                    android:visibility="gone" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/reviews_list"
+                    android:name="udacity.aly.movies_app.ReviewsDetailFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:context="udacity.aly.movies_app.MovieDetailActivity"
+                    tools:listitem="@layout/review_list_content" />
             </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/movie_detail"
-            style="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Movie Detail"
-            android:textIsSelectable="true" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/trailers_label_text"
-        style="?android:attr/textAppearanceLarge"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Trailers"
-        android:textIsSelectable="true" />
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_grade" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/videos_list"
-        android:name="udacity.aly.movies_app.VideosListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="udacity.aly.movies_app.MovieDetailActivity"
-        tools:listitem="@layout/video_list_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/reviews_label_text"
-        style="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Reviews"
-        android:textIsSelectable="true" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/reviews_list"
-        android:name="udacity.aly.movies_app.ReviewsDetailFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="udacity.aly.movies_app.MovieDetailActivity"
-        tools:listitem="@layout/review_list_content" />
-
-    </LinearLayout>
-
-</LinearLayout>
-
-</ScrollView>
+</FrameLayout>
